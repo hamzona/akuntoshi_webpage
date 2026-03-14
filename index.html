@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akuntoshi — Digital Future</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ═══ CURTAIN REVEAL ═══ -->
+    <div class="curtain" id="curtain">
+      <div class="curtain-panel curtain-left"></div>
+      <div class="curtain-panel curtain-right"></div>
+      <div class="curtain-logo">
+        <span class="logo-bracket">&lt;</span>AKU<span class="logo-highlight"
+          >NOSHI</span
+        ><span class="logo-bracket">/&gt;</span>
+      </div>
+    </div>
+
+    <!-- ═══ CANVAS BACKGROUND ═══ -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- ═══ NAVIGATION ═══ -->
+    <nav class="nav" id="nav">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-bracket">&lt;</span>AKU<span class="logo-highlight"
+            >NOSHI</span
+          ><span class="logo-bracket">/&gt;</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#work" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="hero">
+      <div class="hero-grid-overlay"></div>
+      <div class="hero-radial"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Digital evolution</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="title-line">We Design</span>
+          <span class="title-line gradient-text">The Future</span>
+          <span class="title-line">Digitally.</span>
+        </h1>
+        <p class="hero-sub">
+          We create modern web solutions that combine aesthetics and performance
+          — from idea to digital reality.
+        </p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">
+            <span>Explore services</span>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost">Contact us</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num" data-target="150">0</span
+            ><span class="stat-plus">+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num" data-target="98">0</span
+            ><span class="stat-plus">%</span>
+            <span class="stat-label">Satisfaction</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num" data-target="8">0</span
+            ><span class="stat-plus">+</span>
+            <span class="stat-label">Years</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="holo-ring ring-1"></div>
+        <div class="holo-ring ring-2"></div>
+        <div class="holo-ring ring-3"></div>
+        <div class="holo-core"></div>
+        <div class="orbit-dot od-1"></div>
+        <div class="orbit-dot od-2"></div>
+        <div class="orbit-dot od-3"></div>
+      </div>
+      <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section-header" data-reveal-header>
+          <span class="section-tag">&lt;01&gt; About us</span>
+          <h2 class="section-title">
+            We combine <span class="gradient-text">creativity</span> and
+            technology
+          </h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              Akuntoshi is a digital agency dedicated to creating modern web
+              solutions. Our mission is to transform your ideas into digital
+              experiences that leave an impression.
+            </p>
+            <p>
+              With a team of experienced developers and designers, we use the
+              latest technologies to ensure your project is fast, secure, and
+              visually appealing.
+            </p>
+            <div class="about-features">
+              <div class="feature">
+                <div class="feature-icon">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4>Fast results</h4>
+                  <p>From concept to launch in record time.</p>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="feature-icon">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4>Security first</h4>
+                  <p>Your data is protected by the latest standards.</p>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="feature-icon">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                      d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h4>Global approach</h4>
+                  <p>Designed for users around the world.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="about-visual">
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">akuntoshi.config</span>
+              </div>
+              <div class="code-body">
+                <code>
+                  <span class="code-line"
+                    ><span class="c-purple">const</span>
+                    <span class="c-blue">mission</span> = {</span
+                  >
+                  <span class="code-line">
+                    <span class="c-cyan">creativity</span>:
+                    <span class="c-green">"∞"</span>,</span
+                  >
+                  <span class="code-line">
+                    <span class="c-cyan">performance</span>:
+                    <span class="c-orange">"blazing"</span>,</span
+                  >
+                  <span class="code-line">
+                    <span class="c-cyan">innovation</span>:
+                    <span class="c-green">true</span>,</span
+                  >
+                  <span class="code-line">
+                    <span class="c-cyan">quality</span>:
+                    <span class="c-orange">"premium"</span>,</span
+                  >
+                  <span class="code-line">
+                    <span class="c-cyan">support</span>:
+                    <span class="c-orange">"24/7"</span></span
+                  >
+                  <span class="code-line">};</span>
+                  <span class="code-line"></span>
+                  <span class="code-line"
+                    ><span class="c-purple">export default</span>
+                    <span class="c-blue">mission</span>;</span
+                  >
+                </code>
+                <span class="cursor-blink">|</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SERVICES ═══ -->
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-header center" data-reveal-header>
+          <span class="section-tag">&lt;02&gt; Services</span>
+          <h2 class="section-title">
+            What we <span class="gradient-text">do</span>
+          </h2>
+          <p class="section-desc">
+            We provide complete digital solutions — from design to
+            implementation.
+          </p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-border"></div>
+            <div class="card-content">
+              <div class="card-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <path d="M8 21h8M12 17v4" />
+                </svg>
+              </div>
+              <h3>Web Development</h3>
+              <p>
+                We build fast, responsive, and modern websites using the latest
+                technologies.
+              </p>
+              <div class="card-tech">
+                <span>React</span><span>Next.js</span><span>Node</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-border"></div>
+            <div class="card-content">
+              <div class="card-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                  />
+                </svg>
+              </div>
+              <h3>UI/UX Design</h3>
+              <p>
+                We create intuitive and visually attractive user interfaces that
+                delight.
+              </p>
+              <div class="card-tech">
+                <span>Figma</span><span>Motion</span><span>3D</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-border"></div>
+            <div class="card-content">
+              <div class="card-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M12 2a10 10 0 1 0 10 10H12V2z" />
+                  <path d="M20.66 8A10 10 0 0 0 14 2.05V8h6.66z" />
+                </svg>
+              </div>
+              <h3>SEO & Marketing</h3>
+              <p>
+                We increase your search engine visibility and bring in quality
+                users.
+              </p>
+              <div class="card-tech">
+                <span>Analytics</span><span>SEO</span><span>Ads</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-border"></div>
+            <div class="card-content">
+              <div class="card-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="5" y="2" width="14" height="20" rx="2" />
+                  <path d="M12 18h.01" />
+                </svg>
+              </div>
+              <h3>Mobile Apps</h3>
+              <p>
+                We develop mobile applications that work flawlessly on all
+                platforms.
+              </p>
+              <div class="card-tech">
+                <span>Flutter</span><span>iOS</span><span>Android</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-border"></div>
+            <div class="card-content">
+              <div class="card-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  />
+                </svg>
+              </div>
+              <h3>Cloud & DevOps</h3>
+              <p>
+                We optimize infrastructure for maximum scalability and
+                reliability.
+              </p>
+              <div class="card-tech">
+                <span>AWS</span><span>Docker</span><span>CI/CD</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-border"></div>
+            <div class="card-content">
+              <div class="card-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364"
+                  />
+                </svg>
+              </div>
+              <h3>AI Integrations</h3>
+              <p>
+                We implement AI solutions that automate and enhance your
+                processes.
+              </p>
+              <div class="card-tech">
+                <span>OpenAI</span><span>ML</span><span>NLP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WORK / PROJECTS ═══ -->
+    <section class="section work" id="work">
+      <div class="container">
+        <div class="section-header center" data-reveal-header>
+          <span class="section-tag">&lt;03&gt; Projects</span>
+          <h2 class="section-title">
+            Our <span class="gradient-text">work</span>
+          </h2>
+        </div>
+        <div class="work-grid">
+          <div class="work-card">
+            <div class="work-img">
+              <div class="work-placeholder">
+                <div class="wp-bar"></div>
+                <div class="wp-bar short"></div>
+                <div class="wp-grid">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div class="work-info">
+              <span class="work-cat">Web Application</span>
+              <h3>FinBoard Dashboard</h3>
+              <p>
+                Interactive dashboard for financial analytics with real-time
+                data.
+              </p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-img">
+              <div class="work-placeholder alt">
+                <div class="wp-circle"></div>
+                <div class="wp-lines">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div class="work-info">
+              <span class="work-cat">E-Commerce</span>
+              <h3>NeoShop Platform</h3>
+              <p>Modern e-commerce platform with AI product recommendations.</p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-img">
+              <div class="work-placeholder dark">
+                <div class="wp-hex"></div>
+                <div class="wp-dots">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="work-info">
+              <span class="work-cat">Mobile App</span>
+              <h3>PulseTrack Fitness</h3>
+              <p>
+                Cross-platform fitness app with real-time progress tracking.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <span class="section-tag">&lt;04&gt; Contact</span>
+            <h2 class="section-title">
+              Let's start a <span class="gradient-text">collaboration</span>
+            </h2>
+            <p>
+              Have a project in mind? Get in touch and together we'll create
+              something amazing.
+            </p>
+            <div class="contact-details">
+              <div class="contact-item" data-reveal="fade-up" data-delay="2">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <span>info@akunoshi.com</span>
+              </div>
+              <div class="contact-item" data-reveal="fade-up" data-delay="3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Zagreb, Croatia</span>
+              </div>
+            </div>
+          </div>
+          <form class="contact-form" id="contactForm" onsubmit="return false;">
+            <div class="form-group">
+              <input
+                type="text"
+                id="name"
+                placeholder="Your name"
+                required
+                autocomplete="name"
+              />
+              <div class="input-glow"></div>
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                id="email"
+                placeholder="Email address"
+                required
+                autocomplete="email"
+              />
+              <div class="input-glow"></div>
+            </div>
+            <div class="form-group">
+              <textarea
+                id="message"
+                rows="5"
+                placeholder="Your message..."
+                required
+              ></textarea>
+              <div class="input-glow"></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <span>Send message</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner" data-reveal-footer>
+          <div class="footer-brand">
+            <span class="logo-bracket">&lt;</span>AKU<span
+              class="logo-highlight"
+              >NOSHI</span
+            ><span class="logo-bracket">/&gt;</span>
+            <p>Digital future, today.</p>
+          </div>
+          <div class="footer-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#work">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="footer-copy">
+            <span>&copy; 2026 Akuntoshi. All rights reserved.</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* ── Particle Canvas ── */
+      const canvas = document.getElementById("particleCanvas");
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+      let mouse = { x: null, y: null };
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+      document.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      class Particle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.4;
+          this.speedY = (Math.random() - 0.5) * 0.4;
+          this.opacity = Math.random() * 0.5 + 0.1;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 100, 200, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+      function connectParticles() {
+        for (let a = 0; a < particles.length; a++) {
+          for (let b = a + 1; b < particles.length; b++) {
+            const dx = particles[a].x - particles[b].x;
+            const dy = particles[a].y - particles[b].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(0, 100, 200, ${0.08 * (1 - dist / 120)})`;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(particles[a].x, particles[a].y);
+              ctx.lineTo(particles[b].x, particles[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        connectParticles();
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
+      /* ── Scroll Nav ── */
+      const nav = document.getElementById("nav");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 50);
+      });
+
+      /* ── Mobile Menu ── */
+      const toggle = document.getElementById("navToggle");
+      const links = document.getElementById("navLinks");
+      toggle.addEventListener("click", () => {
+        links.classList.toggle("open");
+        toggle.classList.toggle("active");
+      });
+      links.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          links.classList.remove("open");
+          toggle.classList.remove("active");
+        });
+      });
+
+      /* ── Active Section Highlight ── */
+      const sections = document.querySelectorAll(".section, .hero");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((l) => l.classList.remove("active"));
+              const id = entry.target.id;
+              const active = document.querySelector(`.nav-link[href="#${id}"]`);
+              if (active) active.classList.add("active");
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+      sections.forEach((s) => observer.observe(s));
+
+      /* ── Animate Stats ── */
+      const statNums = document.querySelectorAll(".stat-num");
+      let statAnimated = false;
+      const statObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !statAnimated) {
+            statAnimated = true;
+            statNums.forEach((num) => {
+              const target = +num.dataset.target;
+              let current = 0;
+              const increment = target / 60;
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  current = target;
+                  clearInterval(timer);
+                }
+                num.textContent = Math.floor(current);
+              }, 25);
+            });
+          }
+        },
+        { threshold: 0.5 },
+      );
+      if (statNums.length)
+        statObserver.observe(statNums[0].closest(".hero-stats"));
+
+      /* ── Scroll Reveal ── */
+      const reveals = document.querySelectorAll(
+        ".service-card, .work-card, .about-text, .about-visual, .contact-info, .contact-form, .feature, [data-reveal], [data-reveal-header], [data-reveal-footer]",
+      );
+      const revealObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+              revealObs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      );
+      reveals.forEach((el) => revealObs.observe(el));
+
+      /* ── Smooth Scroll ── */
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target)
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      /* ── Curtain Reveal ── */
+      window.addEventListener("load", () => {
+        const curtain = document.getElementById("curtain");
+        setTimeout(() => {
+          curtain.classList.add("open");
+        }, 800);
+        setTimeout(() => {
+          curtain.style.pointerEvents = "none";
+        }, 2200);
+        setTimeout(() => {
+          curtain.remove();
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>
