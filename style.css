@@ -361,6 +361,17 @@ button {
   }
 }
 
+@keyframes blinkCaret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -372,6 +383,38 @@ button {
 
 .title-line {
   display: block;
+  min-height: 1.1em;
+}
+
+.title-line.typing-ready {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.title-line.typing-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.title-line.typing-active::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 0.9em;
+  margin-left: 0.14em;
+  border-radius: 999px;
+  background: currentColor;
+  vertical-align: -0.08em;
+  box-shadow: 0 0 12px currentColor;
+  animation: blinkCaret 0.85s step-end infinite;
+}
+
+.title-line.gradient-text.typing-active::after {
+  background: var(--blue-primary);
+  box-shadow: 0 0 12px rgba(0, 119, 230, 0.75);
 }
 
 .gradient-text {
@@ -1065,6 +1108,7 @@ button {
 }
 
 .work-card {
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1086,17 +1130,37 @@ button {
   transition-delay: 0.3s;
 }
 
+.work-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(0, 100, 200, 0.06) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.work-card:hover::before {
+  opacity: 1;
+}
+
 .work-card:hover {
   border-color: rgba(0, 100, 200, 0.2);
-  transform: translateY(-6px);
   box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.08),
-    0 0 30px rgba(0, 100, 200, 0.05);
+    0 14px 36px rgba(0, 0, 0, 0.06),
+    0 0 18px rgba(0, 100, 200, 0.04);
 }
 
 .work-img {
   height: 220px;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Placeholder visuals */
@@ -1209,6 +1273,14 @@ button {
 
 .work-info {
   padding: 24px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-card:hover .work-img,
+.work-card:hover .work-info {
+  transform: translateY(-4px);
 }
 
 .work-cat {
@@ -1487,23 +1559,6 @@ button {
   animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
 }
 
-.hero-title .title-line {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.hero-title .title-line:nth-child(1) {
-  animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
-}
-
-.hero-title .title-line:nth-child(2) {
-  animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.35s forwards;
-}
-
-.hero-title .title-line:nth-child(3) {
-  animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
-}
-
 .hero-sub {
   opacity: 0;
   transform: translateY(20px);
@@ -1681,13 +1736,18 @@ button {
 }
 
 .screen-front {
-  background: url("https://www.microsoft.com/en-us/microsoft-365/blog/wp-content/uploads/sites/2/2021/06/WIN_CML_Start_Dark_16x9_en-US.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: #050816;
   overflow: hidden;
   backface-visibility: hidden;
   transform: rotateY(180deg);
+}
+
+.screen-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
 }
 
 .screen-back {

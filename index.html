@@ -113,7 +113,19 @@
             <div class="base-back"></div>
 
             <div class="screen">
-              <div class="screen-front"></div>
+              <div class="screen-front">
+                <video
+                  class="screen-video"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="auto"
+                  aria-hidden="true"
+                >
+                  <source src="coding-video.mp4" type="video/mp4" />
+                </video>
+              </div>
               <div class="screen-back"></div>
               <div class="screen-left"></div>
               <div class="screen-right"></div>
@@ -638,6 +650,9 @@
       const ctx = canvas.getContext("2d");
       let particles = [];
       let mouse = { x: null, y: null };
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
 
       function resize() {
         canvas.width = window.innerWidth;
@@ -772,6 +787,149 @@
       if (statNums.length)
         statObserver.observe(statNums[0].closest(".hero-stats"));
 
+      /* -- Text Animation -- */
+      const scrambleFrames = new WeakMap();
+      const scrambleCharset = "AKUNTOSHI<>/{}[]01";
+      const scrambleSelector =
+        ".section-tag, .card-content h3, .work-info h3, .work-cat";
+
+      const scrambleText = (element, duration = 560) => {
+        if (!element || prefersReducedMotion.matches) return;
+
+        const original =
+          element.dataset.scrambleOriginal || element.textContent.trim();
+
+        if (!original) return;
+
+        element.dataset.scrambleOriginal = original;
+
+        const activeFrame = scrambleFrames.get(element);
+        if (activeFrame) {
+          cancelAnimationFrame(activeFrame);
+        }
+
+        let frame = 0;
+        const totalFrames = Math.max(12, Math.round(duration / 16));
+
+        const render = () => {
+          const progress = Math.min(frame / totalFrames, 1);
+          const revealCount = Math.floor(
+            original.length * Math.pow(progress, 0.82),
+          );
+
+          element.textContent = original
+            .split("")
+            .map((char, index) => {
+              if (char === " ") return " ";
+              if (index < revealCount) return original[index];
+
+              return scrambleCharset[
+                Math.floor(Math.random() * scrambleCharset.length)
+              ];
+            })
+            .join("");
+
+          if (progress < 1) {
+            frame += 1;
+            scrambleFrames.set(element, requestAnimationFrame(render));
+            return;
+          }
+
+          element.textContent = original;
+        };
+
+        render();
+      };
+
+      const runScrambleTargets = (root) => {
+        if (!root || prefersReducedMotion.matches) return;
+
+        const targets = [];
+
+        if (root.matches?.(scrambleSelector)) {
+          targets.push(root);
+        }
+
+        if (root.querySelectorAll) {
+          targets.push(...root.querySelectorAll(scrambleSelector));
+        }
+
+        [...new Set(targets)].forEach((element, index) => {
+          setTimeout(() => scrambleText(element, 420 + index * 70), index * 60);
+        });
+      };
+
+      const initializeTextAnimation = () => {
+        if (prefersReducedMotion.matches) return;
+
+        document
+          .querySelectorAll(".service-card, .work-card")
+          .forEach((card) => {
+            card.addEventListener("mouseenter", () => {
+              scrambleText(
+                card.querySelector(".card-content h3, .work-info h3"),
+                420,
+              );
+
+              if (card.classList.contains("work-card")) {
+                scrambleText(card.querySelector(".work-cat"), 360);
+              }
+            });
+          });
+      };
+
+      initializeTextAnimation();
+
+      const heroTitleLines = [...document.querySelectorAll(".hero-title .title-line")];
+
+      const initializeHeroTitleTyping = () => {
+        if (!heroTitleLines.length || prefersReducedMotion.matches) return;
+
+        const startDelay = 2200;
+        const charDelay = 38;
+        const linePause = 90;
+        const finalCaretPause = 260;
+        let offset = 0;
+
+        heroTitleLines.forEach((line, index) => {
+          const originalText = line.dataset.titleLine || line.textContent.trim();
+          const characters = Array.from(originalText);
+          const isLastLine = index === heroTitleLines.length - 1;
+          const lineDelay = startDelay + offset;
+
+          line.dataset.titleLine = originalText;
+          line.textContent = "";
+          line.classList.remove("typing-visible", "typing-active");
+          line.classList.add("typing-ready");
+
+          setTimeout(() => {
+            let characterIndex = 0;
+
+            line.classList.remove("typing-ready");
+            line.classList.add("typing-visible", "typing-active");
+
+            const typeNextCharacter = () => {
+              characterIndex += 1;
+              line.textContent = characters.slice(0, characterIndex).join("");
+
+              if (characterIndex < characters.length) {
+                setTimeout(typeNextCharacter, charDelay);
+                return;
+              }
+
+              setTimeout(
+                () => line.classList.remove("typing-active"),
+                isLastLine ? finalCaretPause : 0,
+              );
+            };
+
+            typeNextCharacter();
+          }, lineDelay);
+
+          offset += characters.length * charDelay + linePause;
+        });
+      };
+
       /* -- Laptop Hero Animation -- */
       const laptop = document.querySelector(".laptop");
 
@@ -786,7 +944,7 @@
         const minRotX = -180;
         const maxRotX = 0;
         const dragSpeed = 0.7;
-        const idleSpeed = 45;
+        const idleSpeed = 18;
         const returnSpeed = 5;
         const snapThreshold = 0.15;
 
@@ -945,6 +1103,7 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("revealed");
+              runScrambleTargets(entry.target);
               revealObs.unobserve(entry.target);
             }
           });
@@ -966,9 +1125,13 @@
       /* ── Curtain Reveal ── */
       window.addEventListener("load", () => {
         const curtain = document.getElementById("curtain");
+        initializeHeroTitleTyping();
         setTimeout(() => {
           curtain.classList.add("open");
         }, 800);
+        setTimeout(() => {
+          scrambleText(document.querySelector(".hero-badge span:last-child"), 760);
+        }, 2100);
         setTimeout(() => {
           curtain.style.pointerEvents = "none";
         }, 2200);
