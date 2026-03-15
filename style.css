@@ -1665,7 +1665,9 @@ button {
   height: 150px;
   transform-style: preserve-3d;
   transform-origin: bottom left;
-  transform: rotateX(80deg);
+  transform: rotateX(180deg);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .screen-front,

@@ -776,6 +776,11 @@
       const laptop = document.querySelector(".laptop");
 
       if (laptop) {
+        const screen = laptop.querySelector(".screen");
+        const introDelay = 2950;
+        const lidClosedAngle = 180;
+        const lidOpenAngle = 80;
+        const lidOpenDuration = 1600;
         const startRotX = -120;
         const startRotZ = 180;
         const minRotX = -180;
@@ -791,6 +796,9 @@
         let lastY = 0;
         let rotX = startRotX;
         let rotZ = startRotZ;
+        let lidAngle = lidClosedAngle;
+        let introComplete = !screen;
+        let lidAnimationStart = 0;
         let lastFrameTime = performance.now();
 
         const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -801,9 +809,25 @@
         };
 
         const shortestAngleDelta = (from, to) => ((to - from + 540) % 360) - 180;
+        const easeOutBack = (progress) => {
+          const overshoot = 1.05;
+          const inverse = progress - 1;
+
+          return (
+            1 +
+            (overshoot + 1) * inverse * inverse * inverse +
+            overshoot * inverse * inverse
+          );
+        };
 
         const renderLaptop = () => {
           laptop.style.transform = `rotateX(${rotX}deg) rotateZ(${rotZ}deg)`;
+        };
+
+        const renderLid = () => {
+          if (screen) {
+            screen.style.transform = `rotateX(${lidAngle}deg)`;
+          }
         };
 
         const stopDragging = () => {
@@ -812,6 +836,36 @@
           isDragging = false;
           isReturning = true;
           laptop.classList.remove("dragging");
+        };
+
+        const animateLidOpen = (now) => {
+          if (!screen) {
+            introComplete = true;
+            return;
+          }
+
+          if (!lidAnimationStart) {
+            lidAnimationStart = now;
+          }
+
+          const progress = Math.min(
+            (now - lidAnimationStart) / lidOpenDuration,
+            1,
+          );
+          const easedProgress = easeOutBack(progress);
+
+          lidAngle =
+            lidClosedAngle + (lidOpenAngle - lidClosedAngle) * easedProgress;
+          renderLid();
+
+          if (progress < 1) {
+            requestAnimationFrame(animateLidOpen);
+            return;
+          }
+
+          lidAngle = lidOpenAngle;
+          introComplete = true;
+          renderLid();
         };
 
         const animateLaptop = (now) => {
@@ -832,7 +886,7 @@
                 rotZ = startRotZ;
                 isReturning = false;
               }
-            } else {
+            } else if (introComplete) {
               rotZ = wrapAngle(rotZ + idleSpeed * deltaTime);
             }
 
@@ -871,7 +925,14 @@
           stopDragging();
         });
 
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            requestAnimationFrame(animateLidOpen);
+          }, introDelay);
+        });
+
         renderLaptop();
+        renderLid();
         requestAnimationFrame(animateLaptop);
       }
 
