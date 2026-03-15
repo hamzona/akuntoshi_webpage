@@ -14,13 +14,15 @@
   </head>
   <body>
     <!-- ═══ CURTAIN REVEAL ═══ -->
-    <div class="curtain" id="curtain">
-      <div class="curtain-panel curtain-left"></div>
-      <div class="curtain-panel curtain-right"></div>
-      <div class="curtain-logo">
-        <span class="logo-bracket">&lt;</span>AKU<span class="logo-highlight"
-          >NOSHI</span
-        ><span class="logo-bracket">/&gt;</span>
+    <div class="curtain" id="curtain" aria-hidden="true">
+      <div class="boot-console" id="bootConsole">
+        <div class="boot-headline">[    0.000000] AKUNTOSHI Linux 6.8.12-akuos (tty1)</div>
+        <div class="boot-log" id="bootLog"></div>
+        <div class="boot-prompt" id="bootPrompt">
+          <span class="boot-prompt-label">root@akuntoshi:~# </span>
+          <span class="boot-command" id="bootCommand"></span>
+          <span class="boot-cursor" aria-hidden="true"></span>
+        </div>
       </div>
     </div>
 
@@ -407,6 +409,57 @@
             </div>
           </div>
           <div class="about-visual">
+            <div class="mission-network">
+              <div class="mission-grid" aria-hidden="true"></div>
+              <div class="mission-pulse mission-pulse-a" aria-hidden="true"></div>
+              <div class="mission-pulse mission-pulse-b" aria-hidden="true"></div>
+              <span class="mission-code mission-code-top">const mission</span>
+              <span class="mission-code mission-code-bottom"
+                >export default mission</span
+              >
+              <svg
+                class="mission-links"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <line x1="50" y1="50" x2="22" y2="20"></line>
+                <line x1="50" y1="50" x2="79" y2="18"></line>
+                <line x1="50" y1="50" x2="83" y2="48"></line>
+                <line x1="50" y1="50" x2="22" y2="77"></line>
+                <line x1="50" y1="50" x2="77" y2="76"></line>
+              </svg>
+              <div class="mission-center">
+                <span class="mission-center-label">Akuntoshi Core</span>
+                <strong class="mission-center-title">Mission Network</strong>
+                <p>
+                  Creativity, performance, innovation, quality, and support all
+                  move together.
+                </p>
+              </div>
+              <div class="mission-nodes">
+                <article class="mission-node node-creativity">
+                  <span class="mission-node-key">creativity</span>
+                  <strong class="mission-node-value">&infin;</strong>
+                </article>
+                <article class="mission-node node-performance">
+                  <span class="mission-node-key">performance</span>
+                  <strong class="mission-node-value">blazing</strong>
+                </article>
+                <article class="mission-node node-innovation">
+                  <span class="mission-node-key">innovation</span>
+                  <strong class="mission-node-value">true</strong>
+                </article>
+                <article class="mission-node node-quality">
+                  <span class="mission-node-key">quality</span>
+                  <strong class="mission-node-value">premium</strong>
+                </article>
+                <article class="mission-node node-support">
+                  <span class="mission-node-key">support</span>
+                  <strong class="mission-node-value">24/7</strong>
+                </article>
+              </div>
+            </div>
             <div class="code-window">
               <div class="code-header">
                 <span class="code-dot red"></span>
@@ -672,7 +725,7 @@
         reset() {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 0.5;
+          this.size = Math.random() * 2.3 + 0.8;
           this.speedX = (Math.random() - 0.5) * 0.4;
           this.speedY = (Math.random() - 0.5) * 0.4;
           this.opacity = Math.random() * 0.5 + 0.1;
@@ -1125,19 +1178,126 @@
       /* ── Curtain Reveal ── */
       window.addEventListener("load", () => {
         const curtain = document.getElementById("curtain");
+        const bootLog = document.getElementById("bootLog");
+        const bootPrompt = document.getElementById("bootPrompt");
+        const bootCommand = document.getElementById("bootCommand");
+        const badgeLabel = document.querySelector(".hero-badge span:last-child");
+
+        if (!curtain || !bootLog || !bootPrompt || !bootCommand) return;
+
         initializeHeroTitleTyping();
-        setTimeout(() => {
+
+        const bootMessages = [
+          {
+            text: "[    0.184211] Command line: BOOT_IMAGE=/boot/vmlinuz-6.8.12-akuos quiet splash",
+            className: "is-muted",
+            delay: 110,
+          },
+          {
+            text: "[    0.472901] systemd[1]: Starting Journal Service...",
+            delay: 120,
+          },
+          {
+            text: "[    0.691774] systemd[1]: Started Journal Service.",
+            className: "is-accent",
+            delay: 110,
+          },
+          {
+            text: "[    0.981422] systemd[1]: Reached target Local File Systems.",
+            delay: 110,
+          },
+          {
+            text: "[    1.247006] systemd[1]: Started Network Manager.",
+            className: "is-accent",
+            delay: 100,
+          },
+          {
+            text: "[    1.516713] akuntoshi-ui[241]: Loading render pipeline...",
+            delay: 120,
+          },
+          {
+            text: "[    1.782915] akuntoshi-ui[241]: Binding motion engine...",
+            delay: 110,
+          },
+          {
+            text: "[    2.048331] systemd[1]: Reached target Graphical Interface.",
+            className: "is-accent",
+            delay: 130,
+          },
+        ];
+
+        const sleep = (duration) =>
+          new Promise((resolve) => {
+            window.setTimeout(resolve, duration);
+          });
+
+        const appendBootLine = (message) => {
+          const entry = document.createElement("div");
+          entry.className = ["boot-entry", message.className].filter(Boolean).join(" ");
+          entry.textContent = message.text;
+          bootLog.append(entry);
+
+          requestAnimationFrame(() => {
+            entry.classList.add("is-visible");
+          });
+        };
+
+        const typeBootCommand = async (command) => {
+          bootCommand.textContent = "";
+          bootPrompt.classList.add("is-visible");
+
+          for (const character of command) {
+            bootCommand.textContent += character;
+            await sleep(character === "." ? 90 : 55);
+          }
+        };
+
+        const revealSequence = () => {
           curtain.classList.add("open");
-        }, 800);
-        setTimeout(() => {
-          scrambleText(document.querySelector(".hero-badge span:last-child"), 760);
-        }, 2100);
-        setTimeout(() => {
-          curtain.style.pointerEvents = "none";
-        }, 2200);
-        setTimeout(() => {
-          curtain.remove();
-        }, 3000);
+
+          setTimeout(() => {
+            scrambleText(badgeLabel, 760);
+          }, 320);
+
+          setTimeout(() => {
+            curtain.style.pointerEvents = "none";
+          }, 480);
+
+          setTimeout(() => {
+            curtain.remove();
+          }, 860);
+        };
+
+        const runBootSequence = async () => {
+          if (prefersReducedMotion.matches) {
+            bootMessages.forEach(appendBootLine);
+            bootPrompt.classList.add("is-visible");
+            bootCommand.textContent = "startx";
+            appendBootLine({
+              text: '[    2.284190] xinit: starting session "AkuntoshiUI"',
+              className: "is-accent",
+            });
+            setTimeout(revealSequence, 220);
+            return;
+          }
+
+          for (const message of bootMessages) {
+            appendBootLine(message);
+            await sleep(message.delay);
+          }
+
+          await sleep(100);
+          await typeBootCommand("startx");
+          await sleep(140);
+          appendBootLine({
+            text: '[    2.284190] xinit: starting session "AkuntoshiUI"',
+            className: "is-accent",
+          });
+          await sleep(280);
+          revealSequence();
+        };
+
+        runBootSequence();
       });
     </script>
   </body>
