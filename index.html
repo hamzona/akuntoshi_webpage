@@ -409,56 +409,46 @@
             </div>
           </div>
           <div class="about-visual">
-            <div class="mission-network">
-              <div class="mission-grid" aria-hidden="true"></div>
-              <div class="mission-pulse mission-pulse-a" aria-hidden="true"></div>
-              <div class="mission-pulse mission-pulse-b" aria-hidden="true"></div>
-              <span class="mission-code mission-code-top">const mission</span>
-              <span class="mission-code mission-code-bottom"
-                >export default mission</span
-              >
-              <svg
-                class="mission-links"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
+            <div class="about-network-panel">
+              <div class="network-panel-noise" aria-hidden="true"></div>
+              <canvas
+                class="about-network-canvas"
+                id="aboutNetworkCanvas"
                 aria-hidden="true"
+              ></canvas>
+              <span
+                class="network-floating-chip chip-strategy"
+                aria-hidden="true"
+                >Strategy Sync</span
               >
-                <line x1="50" y1="50" x2="22" y2="20"></line>
-                <line x1="50" y1="50" x2="79" y2="18"></line>
-                <line x1="50" y1="50" x2="83" y2="48"></line>
-                <line x1="50" y1="50" x2="22" y2="77"></line>
-                <line x1="50" y1="50" x2="77" y2="76"></line>
-              </svg>
-              <div class="mission-center">
-                <span class="mission-center-label">Akuntoshi Core</span>
-                <strong class="mission-center-title">Mission Network</strong>
-                <p>
-                  Creativity, performance, innovation, quality, and support all
-                  move together.
-                </p>
-              </div>
-              <div class="mission-nodes">
-                <article class="mission-node node-creativity">
-                  <span class="mission-node-key">creativity</span>
-                  <strong class="mission-node-value">&infin;</strong>
-                </article>
-                <article class="mission-node node-performance">
-                  <span class="mission-node-key">performance</span>
-                  <strong class="mission-node-value">blazing</strong>
-                </article>
-                <article class="mission-node node-innovation">
-                  <span class="mission-node-key">innovation</span>
-                  <strong class="mission-node-value">true</strong>
-                </article>
-                <article class="mission-node node-quality">
-                  <span class="mission-node-key">quality</span>
-                  <strong class="mission-node-value">premium</strong>
-                </article>
-                <article class="mission-node node-support">
-                  <span class="mission-node-key">support</span>
-                  <strong class="mission-node-value">24/7</strong>
-                </article>
-              </div>
+              <span
+                class="network-floating-chip chip-design"
+                aria-hidden="true"
+                >UX Design</span
+              >
+              <span
+                class="network-floating-chip chip-api chip-highlight"
+                aria-hidden="true"
+                >API Sync</span
+              >
+              <span
+                class="network-floating-chip chip-build"
+                aria-hidden="true"
+                >Build Pipeline</span
+              >
+              <span class="network-floating-chip chip-qa" aria-hidden="true"
+                >QA Review</span
+              >
+              <span
+                class="network-floating-chip chip-support"
+                aria-hidden="true"
+                >Launch Support</span
+              >
+              <span
+                class="network-floating-chip chip-performance"
+                aria-hidden="true"
+                >Performance Tune</span
+              >
             </div>
             <div class="code-window">
               <div class="code-header">
@@ -774,6 +764,370 @@
         requestAnimationFrame(animateParticles);
       }
       animateParticles();
+
+      /* -- About Network Animation -- */
+      const aboutNetworkCanvas = document.getElementById("aboutNetworkCanvas");
+
+      if (aboutNetworkCanvas) {
+        const aboutNetworkPanel = aboutNetworkCanvas.closest(".about-network-panel");
+        const aboutNetworkCtx = aboutNetworkCanvas.getContext("2d");
+        const networkAnchors = [
+          { x: 0.52, y: 0.5, core: true },
+          { x: 0.18, y: 0.24 },
+          { x: 0.35, y: 0.14 },
+          { x: 0.62, y: 0.16 },
+          { x: 0.83, y: 0.28 },
+          { x: 0.85, y: 0.58 },
+          { x: 0.69, y: 0.8 },
+          { x: 0.41, y: 0.84 },
+          { x: 0.17, y: 0.69 },
+          { x: 0.29, y: 0.47 },
+          { x: 0.42, y: 0.34 },
+          { x: 0.69, y: 0.42 },
+          { x: 0.57, y: 0.66 },
+          { x: 0.31, y: 0.73 },
+        ];
+        const networkEdges = [
+          { from: 1, to: 2, curve: -0.14 },
+          { from: 2, to: 3, curve: 0.08 },
+          { from: 3, to: 4, curve: 0.13 },
+          { from: 4, to: 5, curve: 0.14 },
+          { from: 5, to: 6, curve: 0.16 },
+          { from: 6, to: 7, curve: 0.1 },
+          { from: 7, to: 13, curve: 0.08 },
+          { from: 13, to: 8, curve: -0.12 },
+          { from: 8, to: 1, curve: -0.14 },
+          { from: 1, to: 9, curve: 0.1 },
+          { from: 9, to: 10, curve: 0.18 },
+          { from: 10, to: 3, curve: -0.08 },
+          { from: 10, to: 11, curve: 0.08 },
+          { from: 11, to: 4, curve: -0.1 },
+          { from: 11, to: 12, curve: -0.12 },
+          { from: 12, to: 6, curve: 0.08 },
+          { from: 12, to: 7, curve: -0.14 },
+          { from: 9, to: 13, curve: 0.12 },
+          { from: 0, to: 9, curve: -0.06 },
+          { from: 0, to: 10, curve: 0.08 },
+          { from: 0, to: 11, curve: -0.08 },
+          { from: 0, to: 12, curve: 0.06 },
+          { from: 0, to: 3, curve: -0.13 },
+          { from: 0, to: 7, curve: 0.14 },
+        ];
+        const networkNodes = networkAnchors.map((anchor, index) => ({
+          anchorX: anchor.x,
+          anchorY: anchor.y,
+          core: anchor.core || false,
+          radius: 3,
+          amplitudeX: anchor.core ? 5.2 : 4.4 + (index % 4) * 1.05,
+          amplitudeY: anchor.core ? 5.2 : 4.8 + ((index + 2) % 4) * 0.9,
+          secondaryX: anchor.core ? 2.1 : 1.7 + (index % 3) * 0.9,
+          secondaryY: anchor.core ? 1.8 : 1.5 + ((index + 1) % 3) * 0.8,
+          speed: anchor.core ? 0.75 : 0.34 + index * 0.024,
+          phase: index * 0.68,
+          baseX: 0,
+          baseY: 0,
+          x: 0,
+          y: 0,
+        }));
+        const networkPackets = Array.from({ length: 9 }, (_, index) => ({
+          edgeIndex: index % networkEdges.length,
+          progress: 0,
+          direction: 1,
+          speed: 0,
+          size: index % 4 === 0 ? 3.2 : 2.1 + (index % 2) * 0.4,
+          alpha: 0.8,
+        }));
+        let aboutNetworkWidth = 0;
+        let aboutNetworkHeight = 0;
+        let aboutNetworkFrame = null;
+        let aboutNetworkVisible = true;
+        let lastAboutNetworkFrame = performance.now();
+
+        const assignPacketEdge = (
+          packet,
+          edgeIndex = Math.floor(Math.random() * networkEdges.length),
+        ) => {
+          packet.edgeIndex = edgeIndex;
+          packet.direction = Math.random() > 0.45 ? 1 : -1;
+          packet.progress =
+            packet.direction === 1
+              ? Math.random() * 0.28
+              : 1 - Math.random() * 0.28;
+          packet.speed = 0.0015 + Math.random() * 0.0016;
+          packet.alpha = 0.55 + Math.random() * 0.35;
+        };
+
+        networkPackets.forEach((packet, index) => {
+          assignPacketEdge(packet, index % networkEdges.length);
+        });
+
+        const updateAboutNetworkBounds = () => {
+          if (!aboutNetworkPanel || !aboutNetworkCtx) return;
+
+          const bounds = aboutNetworkPanel.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+          aboutNetworkWidth = Math.max(bounds.width, 1);
+          aboutNetworkHeight = Math.max(bounds.height, 1);
+          aboutNetworkCanvas.width = Math.round(aboutNetworkWidth * dpr);
+          aboutNetworkCanvas.height = Math.round(aboutNetworkHeight * dpr);
+          aboutNetworkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          networkNodes.forEach((node) => {
+            node.baseX = node.anchorX * aboutNetworkWidth;
+            node.baseY = node.anchorY * aboutNetworkHeight;
+          });
+
+          renderAboutNetwork(performance.now());
+        };
+
+        const updateAboutNodes = (time) => {
+          networkNodes.forEach((node) => {
+            node.x =
+              node.baseX +
+              Math.sin(time * node.speed + node.phase) * node.amplitudeX +
+              Math.cos(time * node.speed * 0.46 + node.phase * 1.2) *
+                node.secondaryX;
+            node.y =
+              node.baseY +
+              Math.cos(time * node.speed * 0.92 + node.phase) *
+                node.amplitudeY +
+              Math.sin(time * node.speed * 0.54 + node.phase * 0.8) *
+                node.secondaryY;
+          });
+        };
+
+        const getAboutEdgeControl = (edge) => {
+          const from = networkNodes[edge.from];
+          const to = networkNodes[edge.to];
+          const midX = (from.x + to.x) / 2;
+          const midY = (from.y + to.y) / 2;
+          const dx = to.x - from.x;
+          const dy = to.y - from.y;
+          const length = Math.hypot(dx, dy) || 1;
+          const normalX = -dy / length;
+          const normalY = dx / length;
+
+          return {
+            from,
+            to,
+            controlX: midX + normalX * length * edge.curve,
+            controlY: midY + normalY * length * edge.curve,
+          };
+        };
+
+        const getPointOnAboutEdge = (edge, progress) => {
+          const { from, to, controlX, controlY } = getAboutEdgeControl(edge);
+          const inverse = 1 - progress;
+
+          return {
+            x:
+              inverse * inverse * from.x +
+              2 * inverse * progress * controlX +
+              progress * progress * to.x,
+            y:
+              inverse * inverse * from.y +
+              2 * inverse * progress * controlY +
+              progress * progress * to.y,
+          };
+        };
+
+        const drawAboutGlow = () => {
+          const core = networkNodes[0];
+          const accent = networkNodes[6];
+          const glowRadius = Math.min(aboutNetworkWidth, aboutNetworkHeight) * 0.38;
+          const coreGlow = aboutNetworkCtx.createRadialGradient(
+            core.x,
+            core.y,
+            0,
+            core.x,
+            core.y,
+            glowRadius,
+          );
+
+          coreGlow.addColorStop(0, "rgba(0, 119, 230, 0.18)");
+          coreGlow.addColorStop(0.45, "rgba(93, 170, 255, 0.1)");
+          coreGlow.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+          aboutNetworkCtx.save();
+          aboutNetworkCtx.fillStyle = coreGlow;
+          aboutNetworkCtx.fillRect(0, 0, aboutNetworkWidth, aboutNetworkHeight);
+
+          const accentGlow = aboutNetworkCtx.createRadialGradient(
+            accent.x,
+            accent.y,
+            0,
+            accent.x,
+            accent.y,
+            glowRadius * 0.46,
+          );
+
+          accentGlow.addColorStop(0, "rgba(117, 183, 255, 0.14)");
+          accentGlow.addColorStop(1, "rgba(255, 255, 255, 0)");
+          aboutNetworkCtx.fillStyle = accentGlow;
+          aboutNetworkCtx.fillRect(0, 0, aboutNetworkWidth, aboutNetworkHeight);
+          aboutNetworkCtx.restore();
+        };
+
+        const drawAboutConnections = () => {
+          aboutNetworkCtx.save();
+          aboutNetworkCtx.lineCap = "round";
+          aboutNetworkCtx.lineJoin = "round";
+
+          networkEdges.forEach((edge) => {
+            const { from, to, controlX, controlY } = getAboutEdgeControl(edge);
+            const gradient = aboutNetworkCtx.createLinearGradient(
+              from.x,
+              from.y,
+              to.x,
+              to.y,
+            );
+            const isCoreLink = from.core || to.core;
+            const emphasis = isCoreLink ? 0.14 : 0;
+
+            gradient.addColorStop(0, `rgba(0, 85, 204, ${0.3 + emphasis})`);
+            gradient.addColorStop(0.5, `rgba(35, 145, 255, ${0.58 + emphasis})`);
+            gradient.addColorStop(1, `rgba(0, 85, 204, ${0.28 + emphasis})`);
+
+            aboutNetworkCtx.beginPath();
+            aboutNetworkCtx.strokeStyle = isCoreLink
+              ? "rgba(0, 65, 170, 0.22)"
+              : "rgba(0, 65, 170, 0.14)";
+            aboutNetworkCtx.lineWidth = isCoreLink ? 3.2 : 2.1;
+            aboutNetworkCtx.moveTo(from.x, from.y);
+            aboutNetworkCtx.quadraticCurveTo(controlX, controlY, to.x, to.y);
+            aboutNetworkCtx.stroke();
+
+            aboutNetworkCtx.beginPath();
+            aboutNetworkCtx.strokeStyle = gradient;
+            aboutNetworkCtx.shadowBlur = isCoreLink ? 10 : 6;
+            aboutNetworkCtx.shadowColor = isCoreLink
+              ? "rgba(0, 119, 230, 0.24)"
+              : "rgba(0, 119, 230, 0.16)";
+            aboutNetworkCtx.lineWidth = isCoreLink ? 2.1 : 1.45;
+            aboutNetworkCtx.moveTo(from.x, from.y);
+            aboutNetworkCtx.quadraticCurveTo(controlX, controlY, to.x, to.y);
+            aboutNetworkCtx.stroke();
+          });
+
+          aboutNetworkCtx.restore();
+        };
+
+        const drawAboutNodes = () => {
+          networkNodes.forEach((node) => {
+            aboutNetworkCtx.save();
+            aboutNetworkCtx.beginPath();
+            aboutNetworkCtx.shadowBlur = 14;
+            aboutNetworkCtx.shadowColor = "rgba(0, 85, 204, 0.34)";
+            aboutNetworkCtx.fillStyle = "rgba(0, 85, 204, 0.94)";
+            aboutNetworkCtx.strokeStyle = "rgba(255, 255, 255, 0.88)";
+            aboutNetworkCtx.lineWidth = 1.4;
+            aboutNetworkCtx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+            aboutNetworkCtx.fill();
+            aboutNetworkCtx.stroke();
+            aboutNetworkCtx.restore();
+          });
+        };
+
+        const updateAndDrawPackets = (delta) => {
+          networkPackets.forEach((packet) => {
+            const edge = networkEdges[packet.edgeIndex];
+
+            packet.progress += packet.speed * delta * packet.direction;
+
+            if (packet.progress > 1.02 || packet.progress < -0.02) {
+              assignPacketEdge(packet);
+            }
+
+            const progress = Math.max(0, Math.min(packet.progress, 1));
+            const { x, y } = getPointOnAboutEdge(edge, progress);
+
+            aboutNetworkCtx.save();
+            aboutNetworkCtx.beginPath();
+            aboutNetworkCtx.shadowBlur = 14;
+            aboutNetworkCtx.shadowColor = "rgba(88, 169, 255, 0.52)";
+            aboutNetworkCtx.fillStyle = `rgba(73, 162, 247, ${packet.alpha})`;
+            aboutNetworkCtx.arc(x, y, packet.size, 0, Math.PI * 2);
+            aboutNetworkCtx.fill();
+            aboutNetworkCtx.restore();
+          });
+        };
+
+        function renderAboutNetwork(timestamp) {
+          if (!aboutNetworkCtx || !aboutNetworkWidth || !aboutNetworkHeight) {
+            return;
+          }
+
+          const delta = Math.min(timestamp - lastAboutNetworkFrame, 40);
+          const time = timestamp * 0.001;
+
+          lastAboutNetworkFrame = timestamp;
+          aboutNetworkCtx.clearRect(0, 0, aboutNetworkWidth, aboutNetworkHeight);
+
+          updateAboutNodes(time);
+          drawAboutGlow();
+          drawAboutConnections();
+          updateAndDrawPackets(delta);
+          drawAboutNodes();
+        }
+
+        const animateAboutNetwork = (timestamp) => {
+          renderAboutNetwork(timestamp);
+
+          if (!aboutNetworkVisible || prefersReducedMotion.matches) {
+            aboutNetworkFrame = null;
+            return;
+          }
+
+          aboutNetworkFrame = requestAnimationFrame(animateAboutNetwork);
+        };
+
+        const startAboutNetwork = () => {
+          if (aboutNetworkFrame || prefersReducedMotion.matches) return;
+
+          lastAboutNetworkFrame = performance.now();
+          aboutNetworkFrame = requestAnimationFrame(animateAboutNetwork);
+        };
+
+        if (aboutNetworkPanel && aboutNetworkCtx) {
+          updateAboutNetworkBounds();
+
+          if (typeof ResizeObserver === "function") {
+            const aboutNetworkResizeObserver = new ResizeObserver(() => {
+              updateAboutNetworkBounds();
+            });
+
+            aboutNetworkResizeObserver.observe(aboutNetworkPanel);
+          } else {
+            window.addEventListener("resize", updateAboutNetworkBounds);
+          }
+
+          const aboutNetworkObserver = new IntersectionObserver(
+            (entries) => {
+              aboutNetworkVisible = entries[0]?.isIntersecting ?? true;
+
+              if (aboutNetworkVisible) {
+                startAboutNetwork();
+                return;
+              }
+
+              if (aboutNetworkFrame) {
+                cancelAnimationFrame(aboutNetworkFrame);
+                aboutNetworkFrame = null;
+              }
+            },
+            { threshold: 0.2 },
+          );
+
+          aboutNetworkObserver.observe(aboutNetworkPanel);
+
+          if (prefersReducedMotion.matches) {
+            renderAboutNetwork(performance.now());
+          } else {
+            startAboutNetwork();
+          }
+        }
+      }
 
       /* ── Scroll Nav ── */
       const nav = document.getElementById("nav");
